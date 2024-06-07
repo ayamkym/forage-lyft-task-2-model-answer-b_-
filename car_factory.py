@@ -4,7 +4,8 @@ from car import Car
 from engine.capulet_engine import CapuletEngine
 from engine.sternman_engine import SternmanEngine
 from engine.willoughby_engine import WilloughbyEngine
-
+from tire.carrigan_tires import CarriganTire
+from tire.octoprime_tires import OctoprimeTire
 
 class CarFactory:
     @staticmethod
@@ -41,3 +42,14 @@ class CarFactory:
         battery = NubbinBattery(current_date, last_service_date)
         car = Car(engine, battery)
         return car
+
+    def create_tire(self, tire_type, tire_wear):
+        if tire_type == 'Carrigan':
+            return CarriganTire(tire_wear)
+        elif tire_type == 'Octoprime':
+            return OctoprimeTire(tire_wear)
+        else:
+            raise ValueError("Invalid tire type")
+
+    def needs_service(self):
+        return self.tire.needs_service()
